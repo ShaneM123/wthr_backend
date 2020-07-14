@@ -15,7 +15,7 @@
 <p>then cargo run in the project folder (requires rust installed):</p>
 <code>cargo run</code>
 
-<p> then enter the following url in your browser or you can use postman/curl if you wish(no https currently):</p>
-<code>127.0.0.1:8445/todayweatherbycity/2964180</code>
+<p> then enter the following url in your browser or you can use postman/curl if you wish:</p>
+<code>http://127.0.0.1:8445/todayweatherbycity/2964180</code>
 
 <p>the last part of the url is the city code. valid city id's can be found in the citylist.json file and api keys can be obtained by signing up to openweather.org</p>
