@@ -13,5 +13,5 @@
 
 <p> then enter the following url in your browser or you can use postman/curl if you wish:</p>
 <code>http://127.0.0.1:8445/todayweatherbycity/Galway/IE</code>
-
+<p></p>
 <p>the last part of the url is the country code. </p>
