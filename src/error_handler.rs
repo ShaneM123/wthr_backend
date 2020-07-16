@@ -4,8 +4,6 @@ use actix_http::error::Error as ActixHttpError;
 use serde::Deserialize;
 use serde_json::json;
 use std::fmt;
-use anyhow::Error;
-
 
 #[derive(Debug, Deserialize)]
 pub struct ResponseErrorWrapper {

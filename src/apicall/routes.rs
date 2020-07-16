@@ -2,13 +2,13 @@ use actix_web::{ get, web, HttpResponse};
 use reqwest::Url;
 use std::env;
 use serde_derive::{Deserialize, Serialize};
-use anyhow::{Result};
 use crate::error_handler::ResponseErrorWrapper;
 
-#[get("todayweatherbycity/{id}")]
-async fn get_today_weather_by_city_id(city_id: web::Path<i32>) -> Result<HttpResponse, ResponseErrorWrapper>
+
+#[get("todayweatherbycity/{city}/{country_code}")]
+async fn get_today_weather_by_city_id(place: web::Path<(String,String)>) -> Result<HttpResponse, ResponseErrorWrapper>
 {
-    let weather = Forecast::today_weather_by_city(city_id.into_inner()).await?;
+    let weather = Forecast::today_weather_by_city(place.into_inner()).await?;
 
     Ok(HttpResponse::Ok().json(weather))
 }
@@ -35,8 +35,8 @@ struct Forecast {
 }
 
 impl Forecast {
-    async fn today_weather_by_city(id: i32) -> Result<Self, anyhow::Error> {
-        let url = format!("https://api.openweathermap.org/data/2.5/weather?id={}&appid={}", id, env::var("APP_ID").unwrap());
+    async fn today_weather_by_city(place: (String,String)) -> Result<Self, anyhow::Error> {
+        let url = format!("http://api.openweathermap.org/data/2.5/weather?q={},{}&appid={}", place.0, place.1, env::var("APP_ID").unwrap());
         let url = Url::parse(&*url)?;
         let weathers = reqwest::get(url)
             .await?
